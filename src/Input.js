@@ -7,7 +7,9 @@ class Input extends Component{
         super(props);
         this.state = {
         	value: '',
-			response: ''}
+			response: '',
+			exampleData: ''
+		}
 		;
 
         this.handleChange = this.handleChange.bind(this);
@@ -28,6 +30,11 @@ class Input extends Component{
 		axios.get("https://api.ciscospark.com/v1/rooms", {headers: {Authorization: 'Bearer ZmRhZWZlYzYtYTVlZC00YWZiLWJlOTgtOTA0MGY3ODExODBmMDRhMDlmOGYtMmI2'}}).then(response => {
 			console.log(response.data);
 			this.state.response = response.data
+
+			//miguel
+            const example = response.data.items;
+            this.setState({exampleData : example});
+
 		})
 		.catch((error =>{
 			console.log('error 3 ' + error);
