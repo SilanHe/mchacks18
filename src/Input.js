@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "./Input.css";
 import axios from 'axios';
+import RoomItem from './RoomItem'
+
 
 class Input extends Component{
 	constructor(props){
@@ -20,7 +22,7 @@ class Input extends Component{
 	}
 
 	handleSubmit(event){
-		axios.get("https://api.ciscospark.com/v1/rooms", {headers: {Authorization: 'Bearer '.concat}}).then(response => {
+		axios.get("https://api.ciscospark.com/v1/rooms", {headers: {Authorization: 'Bearer '.concat(this.state.value)}}).then(response => {
 			const example = response.data.items;
 			this.setState({exampleData : example});
 			console.log(example);
@@ -44,7 +46,7 @@ class Input extends Component{
 
 				<ul>
 				{this.state.exampleData.map(item =>
-					<li key={item.id}> {item.title}</li>)}
+					<li key={item.id}> <RoomItem roomName={item.title} /></li>)}
 				</ul>
 			</div>
 		);
