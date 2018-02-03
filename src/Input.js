@@ -3,26 +3,48 @@ import "./Input.css";
 import axios from 'axios';
 
 class Input extends Component{
-	constructor(props){
-		super(props);
-	}
+    constructor(props) {
+        super(props);
+        this.state = {
+        	value: '',
+			response: ''}
+		;
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        alert('A token was submitted: ' + this.state.value);
+        event.preventDefault();
+        this.componentDidMount()
+    }
 
 	componentDidMount(){
 		axios.get("https://api.ciscospark.com/v1/rooms", {headers: {Authorization: 'Bearer ZmRhZWZlYzYtYTVlZC00YWZiLWJlOTgtOTA0MGY3ODExODBmMDRhMDlmOGYtMmI2'}}).then(response => {
 			console.log(response.data);
+			this.state.response = response.data
 		})
 		.catch((error =>{
 			console.log('error 3 ' + error);
 		}));
 	}
 
-	render(){
-		return(
-			<div>
-			hello
-			</div>
-		);
-	}
+    render() {
+        return (
+			<form onSubmit={this.handleSubmit}>
+				<label>
+					User Token:
+					<input type="text" value={this.state.value} onChange={this.handleChange} />
+				</label>
+				<input type="submit" value="Submit" />
+			</form>
+        );
+    }
 }
 
 export default Input;
