@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./RoomItem.css";
 import axios from 'axios';
+import { Button } from 'reactstrap';
 
 class RoomItem extends Component{
 	constructor(props){
@@ -18,9 +19,7 @@ class RoomItem extends Component{
 
 	render(){
 		return(
-			<button onClick={this.handleClick}>
-			 {this.props.roomName}
-			 </button>
+            <Button outline onClick={this.handleClick} color="secondary" size="lg" block>{this.props.roomName}</Button>
 		)
 	}
 }

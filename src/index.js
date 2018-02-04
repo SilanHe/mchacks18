@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-import Graph from './Graph';
-import Input from './Input';
+import Main from './Main';
+import 'bootstrap/dist/css/bootstrap.css';
 
-ReactDOM.render(<Input />, document.getElementById('root'));
+ReactDOM.render(<Main />, document.getElementById('root'));
 registerServiceWorker();
