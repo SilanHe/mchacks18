@@ -10,6 +10,10 @@
     padding-bottom: 20px;
 }
 
-.width {
-    width: 80%;
+.center {
+    text-align: center;
+}
+
+.middle {
+    align-content: center;
 }

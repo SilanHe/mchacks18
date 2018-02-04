@@ -19,7 +19,7 @@ class StatsCard extends Component{
 			hello
 				<ul>
 				{Object.entries(this.props.users).map(item =>
-					<li key={item[0]}> {item[0]}</li> )}
+					<li key={item[0]}> {item[0] + " " + item[1]}</li> )}
 				</ul>
 			</div>
 		)
