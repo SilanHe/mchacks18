@@ -16,7 +16,10 @@ class Main extends Component{
 			value: '',
 			dataToDisplay: false,
 			curRoomId: 0,
-			roomMessages: {}
+			roomMessages: {},
+            wordCount: {},
+            sortedWordCount: [],
+            curRoomWordCount: {}
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -46,7 +49,6 @@ class Main extends Component{
 					all_messages = all_messages.concat(messages);
 					roomMessages[roomId] = messages;
 					if(count == (example.length)){
-						console.log(i)
 						this.setState({ listOfMessages: all_messages, roomMessages: roomMessages})	
 					}
 				})
@@ -63,12 +65,52 @@ class Main extends Component{
 	}
 
 	handleRoomClick(e){
-		this.setState({curRoomId: e, dataToDisplay: true});
+		this.mostPopularWords(e);
+		this.setState({curRoomId: e, dataToDisplay: true, curRoomWordCount: this.state.sortedWordCount});
+		console.log(this.state.curRoomWordCount)
 	}
+
+    mostPopularWords(e){
+		this.state.sortedWordCount = [];
+        var msg = this.state.roomMessages[e];
+        for (var i = 0 ; i < msg.length; i ++) {
+            var split = msg[i].text.split(" ");
+            for (var j = 0 ; j < split.length ; j ++){
+                if (split[j] in this.state.wordCount) {
+                    this.state.wordCount[split[j]] += 1;
+                } else {
+                    this.state.wordCount[split[j]] = 1;
+                }
+            }
+        }
+
+        var wordCount = this.state.wordCount;
+
+        // Create items array
+        var items = Object.keys(this.state.wordCount).map(function(key) {
+            return [key, wordCount[key]];
+        });
+
+        // Sort the array based on the second element
+        items.sort(function(first, second) {
+            return second[1] - first[1];
+        });
+
+        // Create a new array with only the first 5 items
+        // for (var k = 0; k < items.length; k ++) {
+        //     this.state.sortedWordCount.push(
+        //         {
+        //             'x':items[k][0],
+        //             'y':items[k][1]
+        //         })
+        // }
+
+		this.state.sortedWordCount = items;
+    }
 
 
 	render(){
-		var statsCard = <StatsCard messages={this.state.roomMessages[(this.state.curRoomId)]} />
+		var statsCard = <StatsCard sortedWordCount={this.state.sortedWordCount} messages={this.state.roomMessages[(this.state.curRoomId)]} />
 		return(
 			<div className='gray'>
 				<Fade>
@@ -121,12 +163,11 @@ class Main extends Component{
 								</Nav>
 							</Col>
 							<Col xs="9">
-
+                                {this.state.dataToDisplay? statsCard : null}
 							</Col>
 						</Row>
 					</Container>
 				</div>
-				{this.state.dataToDisplay? statsCard : null}
 				<Fade>
 					<Footer />
 				</Fade>
