@@ -12,14 +12,12 @@ class StatsCard extends Component{
 	}
 
 	render(){
-		console.log(this.props.users);
-		console.log(Object.entries(this.props.users));
 		return(
 			<div>
 			hello
 				<ul>
-				{Object.entries(this.props.users).map(item =>
-					<li key={item[0]}> {item[0] + " " + item[1]}</li> )}
+				{(this.props.messages).map(item =>
+					<li key={item.id}> {item.text}</li> )}
 				</ul>
 			</div>
 		)
