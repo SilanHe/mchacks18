@@ -4,7 +4,7 @@ import axios from 'axios';
 import RoomItem from './RoomItem'
 import Header from './Header'
 import Footer from './Footer'
-import { Nav, NavItem, NavLink,  Container, Row, Col, Form, Label, Input, Fade, Jumbotron, InputGroup, Button, InputGroupAddon } from 'reactstrap';
+import { Nav, NavItem,  Container, Row, Col, Form, Input, Fade, Jumbotron, InputGroup, Button, InputGroupAddon } from 'reactstrap';
 
 
 class Main extends Component{
@@ -41,39 +41,45 @@ class Main extends Component{
 	render(){
 		return(
 			<div className='gray'>
-				<Header />
+				<Fade>
+					<Header />
+				</Fade>
 				<Jumbotron className='lightgray'>
-					<a href="/">
-						<h1 className='center'>Sparks Stats</h1>
-					</a>
-					<a href="/">
-						<Container>
+					<Fade>
+						<a href="/">
+							<h1 className='center'>Sparks Stats</h1>
+						</a>
+						<a href="/">
+							<Container>
+								<Row>
+									<Col xs="5"/>
+									<Col xs="2">
+										<img src={require('./spark-logo.png')} width='150' height='150' />
+									</Col>
+									<Col xs="5"/>
+								</Row>
+							</Container>
+						</a>
+						<h3 className='center'>Analyze a Cisco Sparks User</h3>
+					</Fade>
+					<hr/>
+					<Fade>
+						<Container >
 							<Row>
-								<Col xs="5"/>
-								<Col xs="2">
-									<img src={require('./spark-logo.png')} width='150' height='150' />
+								<Col xs="2"/>
+								<Col xs="8">
+									<Form onSubmit={this.handleSubmit}>
+										<InputGroup >
+											<InputGroupAddon addonType="prepend" color="info">User Token</InputGroupAddon>
+											<Input type="text" placeholder='Enter your user token please' value={this.state.value} onChange={this.handleChange} />
+											<Button color="info" type="submit" value="Submit">Submit</Button>
+										</InputGroup>
+									</Form>
 								</Col>
-								<Col xs="5"/>
+								<Col xs="2"/>
 							</Row>
 						</Container>
-					</a>
-					<h3 className='center'>Analyze a Cisco Sparks User</h3>
-					<hr/>
-					<Container >
-						<Row>
-							<Col xs="2"/>
-							<Col xs="8">
-								<Form onSubmit={this.handleSubmit}>
-									<InputGroup >
-										<InputGroupAddon addonType="prepend" color="info">User Token</InputGroupAddon>
-										<Input type="text" placeholder='Enter your user token please' value={this.state.value} onChange={this.handleChange} />
-										<Button color="info" type="submit" value="Submit">Submit</Button>
-									</InputGroup>
-								</Form>
-							</Col>
-							<Col xs="2"/>
-						</Row>
-					</Container>
+					</Fade>
 				</Jumbotron>
 				<div className='gray'>
 					<Container>
@@ -90,7 +96,9 @@ class Main extends Component{
 						</Row>
 					</Container>
 				</div>
-				<Footer />
+				<Fade>
+					<Footer />
+				</Fade>
 			</div>
 		);
 	}
