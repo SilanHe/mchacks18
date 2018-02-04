@@ -139,7 +139,7 @@ class StatsCard extends Component{
 		// this.countMessages();
 		var tooltip = (<div> {this.state.key} sent {this.state.value} messages</div>);
 		return(
-			<div>
+			<div className='center'>
 				{/*<ul>*/}
 				{/*{(this.props.messages).map(item =>*/}
 					{/*<li key={item.id}> {item.personEmail}</li> )}*/}

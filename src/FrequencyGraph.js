@@ -12,10 +12,15 @@ class FrequencyGraph extends Component{
             slicedWordCount: props.sortedWordCount.slice(0,10),
             sortedWordCount: props.sortedWordCount
         };
+        this.handleChange = this.listWords.bind(this);
     }
 
     listWords(value){
         this.setState({ slicedWordCount: this.props.sortedWordCount.slice(0,value) });
+    }
+
+    componentWillReceiveProps() {
+        this.listWords(10);
     }
 
     render(){
