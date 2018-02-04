@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./StatsCard.css";
-import axios from 'axios';
+import {AreaChart} from 'react-easy-chart';
+import {Legend} from 'react-easy-chart';
 import {BarChart} from 'react-easy-chart';
 import FrequencyGraph from './FrequencyGraph';
 
@@ -60,8 +61,6 @@ class StatsCard extends Component{
 
 	}
 
-	
-
 	countMessages() {
 		var users = [];
 		var messages = [];
@@ -107,6 +106,7 @@ class StatsCard extends Component{
 				<hr/>
 				<h4>Most Frequently Used Words</h4>
 				<FrequencyGraph sortedWordCount={this.props.sortedWordCount}/>
+				<AreaChart xType={'text'} axes width={1000} height={500} data={this.props.usersOverTime}/>
 			</div>
 		)
 	}
