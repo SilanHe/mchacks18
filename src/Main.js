@@ -5,6 +5,7 @@ import RoomItem from './RoomItem'
 import Header from './Header'
 import StatsCard from './StatsCard'
 import Footer from './Footer'
+import Graph from './Graph'
 import { Nav, NavItem,  Container, Row, Col, Form, Input, Fade, Jumbotron, InputGroup, Button, InputGroupAddon } from 'reactstrap';
 
 
