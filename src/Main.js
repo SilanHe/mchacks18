@@ -49,8 +49,8 @@ class Main extends Component{
 					count ++;
 					all_messages = all_messages.concat(messages);
 					roomMessages[roomId] = messages;
-					if(count == (example.length)){
-						this.setState({ listOfMessages: all_messages, roomMessages: roomMessages})	
+					if(count === (example.length)){
+						this.setState({ listOfMessages: all_messages, roomMessages: roomMessages})
 					}
 				})
 				.catch(error =>{
@@ -106,7 +106,7 @@ class Main extends Component{
         //         })
         // }
 
-		this.state.sortedWordCount = items;
+		this.setState({sortedWordCount:items});
     }
 
 
