@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./StatsCard.css";
-import axios from 'axios';
+import {AreaChart} from 'react-easy-chart';
+import {Legend} from 'react-easy-chart';
 import {BarChart} from 'react-easy-chart';
 import {PieChart} from 'react-easy-chart';
 import {ToolTip} from 'react-easy-chart';
@@ -66,8 +67,6 @@ class StatsCard extends Component{
 		}
 
 	}
-
-	
 
 	countMessages() {
 		var users = [];
@@ -137,21 +136,16 @@ class StatsCard extends Component{
 	  }
 
 	render(){
-		this.countMessages();
+		// this.countMessages();
 		var tooltip = (<div> {this.state.key} sent {this.state.value} messages</div>);
 		return(
 			<div>
-				<ul>
-				{(this.props.messages).map(item =>
-					<li key={item.id}> {item.personEmail}</li> )}
-				</ul>
-
-				<FrequencyGraph sortedWordCount={this.props.sortedWordCount}/>
-			
 				
-
+				<FrequencyGraph sortedWordCount={this.props.sortedWordCount}/>
+				<AreaChart xType={'text'} axes width={1000} height={500} data={this.props.usersOverTime}/>
+	
 				<PieChart
-				    // labels
+		
 				    styles={{
 				      '.chart_lines': {
 				        strokeWidth: 0
@@ -168,7 +162,8 @@ class StatsCard extends Component{
     				mouseOutHandler={this.mouseOutHandler.bind(this)}
     				mouseMoveHandler={this.mouseMoveHandler.bind(this)}
 				    margin={{top: 10, bottom: 10, left: 200, right: 100}}
-				    ></PieChart>
+				    />
+				
 				    {this.state.showToolTip? tooltip : 'Click on a segment to show the value'}
 				    <div>{document.getElementById('location')}</div>
 			</div>
