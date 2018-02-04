@@ -10,7 +10,22 @@
 }
 
 .ul .li {
-    color: #0C99D5;
+    color: whitesmoke;
+    background-color: #0C99D5;
+    text-align: center;
+    padding: 2px 15px 5px;
+    border: 2px solid #D0D1D0;
+    border-radius: 3px;
+    list-style: none;
+    display: inline-block;
+    min-width: 130px;
+    max-width: 300px;
+    margin:5px;
+    text-overflow: ellipsis
+}
+
+.ul .li Hover{
+    background-color: #74BE45;
     text-align: center;
     padding: 2px 15px 5px;
     border: 2px solid #000;

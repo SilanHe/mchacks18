@@ -104,6 +104,8 @@ class StatsCard extends Component{
 				{(this.props.messages).map(item =>
 					<li key={item.id}> {item.personEmail}</li> )}
 				</ul>
+				<hr/>
+				<h4>Most Frequently Used Words</h4>
 				<FrequencyGraph sortedWordCount={this.props.sortedWordCount}/>
 			</div>
 		)

@@ -32,7 +32,7 @@ class FrequencyGraph extends Component{
                         <Col>
                             <ul className='ul'>
                                 {(this.state.slicedWordCount).map(item =>
-                                    <li className='ul li' key={item[0]}> {item[1]} | {item[0]}</li> )}
+                                    <li className='ul li' key={item[0]}> {item[0]}, {item[1]} times</li> )}
                             </ul>
                         </Col>
                     </Row>

@@ -113,7 +113,7 @@ class Main extends Component{
 	render(){
 		var statsCard = <StatsCard sortedWordCount={this.state.sortedWordCount} messages={this.state.roomMessages[(this.state.curRoomId)]} />
 		return(
-			<div className='gray'>
+			<div className='lightgray'>
 				<Fade>
 					<Header />
 				</Fade>
@@ -154,7 +154,7 @@ class Main extends Component{
 						</Container>
 					</Fade>
 				</Jumbotron>
-				<div className='gray'>
+				<div className='lightgray'>
 					<Container>
 						<Row>
 							<Col xs="3">
