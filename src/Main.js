@@ -27,6 +27,7 @@ class Main extends Component{
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleRoomClick = this.handleRoomClick.bind(this);
 		this.msgesOverTime = this.msgesOverTime.bind(this);
+		this.mostPopularWords = this.mostPopularWords.bind(this);
 	}
 
 
@@ -72,15 +73,15 @@ class Main extends Component{
 	handleRoomClick(e){
 		this.setState({curRoomId: e, dataToDisplay: true});
 		this.msgesOverTime(true, this.state.roomMessages[e]);
-		this.mostPopularWords(e);
+		this.mostPopularWords(this.state.roomMessages[e]);
 		this.setState({curRoomId: e, dataToDisplay: true, curRoomWordCount: this.state.sortedWordCount});
 	}
 
 	msgesOverTime(isHour, messages){
-		console.log(messages);
+		// console.log(messages);
 		if (messages === undefined || messages.length == 0){
 		}else{
-			console.log(messages);
+			// console.log(messages);
 			var firstTime = new Date(messages[messages.length - 1].created).getTime()
 			var interval = isHour? 3600000 : 86400000;
 			var intervalNumber = 1;
@@ -132,24 +133,24 @@ class Main extends Component{
 		}
 	}
 
-    mostPopularWords(e){
-		this.state.sortedWordCount = [];
-        var msg = this.state.roomMessages[e];
-        for (var i = 0 ; i < msg.length; i ++) {
-            var split = msg[i].text.split(" ");
-            for (var j = 0 ; j < split.length ; j ++){
-                if (split[j] in this.state.wordCount) {
-                    this.state.wordCount[split[j]] += 1;
-                } else {
-                    this.state.wordCount[split[j]] = 1;
+    mostPopularWords(messages){
+		this.setState({sortedWordCount:[]});
+		var wordCount = {};
+        for (var i = 0 ; i < messages.length; i ++) {
+        	if ('text' in messages[i]){
+                var split = messages[i].text.split(" ");
+                for (var j = 0 ; j < split.length ; j ++){
+                    if (split[j] in wordCount) {
+                        wordCount[split[j]] += 1;
+                    } else {
+                        wordCount[split[j]] = 1;
+                    }
                 }
-            }
+			}
         }
 
-        var wordCount = this.state.wordCount;
-
         // Create items array
-        var items = Object.keys(this.state.wordCount).map(function(key) {
+        var items = Object.keys(wordCount).map(function(key) {
             return [key, wordCount[key]];
         });
 

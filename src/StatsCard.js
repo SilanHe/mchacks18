@@ -140,15 +140,18 @@ class StatsCard extends Component{
 		var tooltip = (<div> {this.state.key} sent {this.state.value} messages</div>);
 		return(
 			<div>
-				<ul>
-				{(this.props.messages).map(item =>
-					<li key={item.id}> {item.personEmail}</li> )}
-				</ul>
+				{/*<ul>*/}
+				{/*{(this.props.messages).map(item =>*/}
+					{/*<li key={item.id}> {item.personEmail}</li> )}*/}
+				{/*</ul>*/}
 				<hr/>
 				<h4>Most Frequently Used Words</h4>
 				<FrequencyGraph sortedWordCount={this.props.sortedWordCount}/>
-				<AreaChart xType={'text'} axes width={1000} height={500} data={this.props.usersOverTime}/>
-	
+				<hr/>
+				<h4>Number of Posts Per User Over Time</h4>
+				<AreaChart xType={'text'} axes width={600} height={500} data={this.props.usersOverTime}/>
+				<hr/>
+				<h4>Number of Messages Per User</h4>
 				<PieChart
 		
 				    styles={{

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ee5a615-5469-45ce-ad7c-755ad5c47d72" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.js" afterPath="$PROJECT_DIR$/src/Main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/StatsCard.js" afterPath="$PROJECT_DIR$/src/StatsCard.js" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -40,8 +40,8 @@
       <file leaf-file-name="Main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="171" column="0" lean-forward="true" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
+            <state relative-caret-position="-937">
+              <caret line="137" column="27" lean-forward="false" selection-start-line="137" selection-start-column="27" selection-end-line="137" selection-end-column="27" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -52,8 +52,8 @@
       <file leaf-file-name="StatsCard.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/StatsCard.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="141" column="17" lean-forward="false" selection-start-line="141" selection-start-column="17" selection-end-line="141" selection-end-column="17" />
+            <state relative-caret-position="274">
+              <caret line="142" column="16" lean-forward="false" selection-start-line="142" selection-start-column="19" selection-end-line="145" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -359,12 +359,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1517684722873</updated>
-      <workItem from="1517684727159" duration="31719000" />
+      <workItem from="1517684727159" duration="33390000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31719000" />
+    <option name="totallyTimeSpent" value="33390000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="17" y="22" width="1260" height="778" extended-state="0" />
@@ -651,8 +651,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="171" column="0" lean-forward="true" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
+        <state relative-caret-position="-937">
+          <caret line="137" column="27" lean-forward="false" selection-start-line="137" selection-start-column="27" selection-end-line="137" selection-end-column="27" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -661,8 +661,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/StatsCard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="141" column="17" lean-forward="false" selection-start-line="141" selection-start-column="17" selection-end-line="141" selection-end-column="17" />
+        <state relative-caret-position="274">
+          <caret line="142" column="16" lean-forward="false" selection-start-line="142" selection-start-column="19" selection-end-line="145" selection-end-column="24" />
           <folding />
         </state>
       </provider>
