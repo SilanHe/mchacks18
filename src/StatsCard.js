@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import "./StatsCard.css";
 import axios from 'axios';
+import {BarChart} from 'react-easy-chart';
+import FrequencyGraph from './FrequencyGraph';
 
 
 class StatsCard extends Component{
 	constructor(props){
 		super(props);
+		this.state= {
+            wordCount: {},
+            sortedWordCount: []
+        };
 	}
 
-	activeUsers(){
-
-	}
 
 	mostPosts() {
 		var users = [];
@@ -97,12 +100,11 @@ class StatsCard extends Component{
 		this.countMessages();
 		return(
 			<div>
-			hello
 				<ul>
 				{(this.props.messages).map(item =>
 					<li key={item.id}> {item.personEmail}</li> )}
 				</ul>
-				
+				<FrequencyGraph sortedWordCount={this.props.sortedWordCount}/>
 			</div>
 		)
 	}
@@ -116,6 +118,5 @@ class StatsCard extends Component{
 	    }
 	    return false;
 	}
-
 }
 export default StatsCard;

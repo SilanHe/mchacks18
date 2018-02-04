@@ -1,0 +1,13 @@
+.cards {
+    list-style: none;
+}
+
+.ul {
+    list-style:none;
+    outline-color: #0C99D5;
+}
+
+.ul .li {
+    outline-color: #0C99D5;
+    color: #74BE45;
+}
