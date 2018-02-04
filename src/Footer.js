@@ -13,7 +13,7 @@ import {
     DropdownMenu,
     DropdownItem } from 'reactstrap';
 
-class Header extends Component {
+class Footer extends Component {
     constructor(props) {
         super(props);
 
@@ -27,16 +27,26 @@ class Header extends Component {
             isOpen: !this.state.isOpen
         });
     }
+
     render() {
         return (
-            <div>
+            <div className='footer'>
                 <Navbar className='color' color="faded" light expand="md">
                     <NavbarBrand href="/">Sparks Stats</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLink href="https://github.com/SilanHe/mchacks18">Github</NavLink>
+                                <NavLink href="https://github.com/micklethepickle">Michel Ma</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="https://github.com/LiTigre/mchacks18">Li Zhang</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="https://github.com/SilanHe">Silan He</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="https://github.com/SilanHe/mchacks18">Project Github</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>
@@ -46,4 +56,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default Footer;

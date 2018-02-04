@@ -1,19 +1,27 @@
 .lightgray {
     background-color: aliceblue;
-    padding-top: 20px;
-    padding-bottom: 20px;
 }
 
 .whitegray {
     background-color: mintcream;
-    padding-top: 20px;
-    padding-bottom: 20px;
 }
 
 .center {
     text-align: center;
 }
 
-.middle {
-    align-content: center;
+.darkblue {
+    background-color: #0C99D5;
+}
+
+.green {
+    background-color: #74BE45;
+}
+
+.lightblue {
+    background-color: #A9DFF3;
+}
+
+.gray {
+    background-color: #D0D1D0;
 }

@@ -5,6 +5,8 @@ import RoomItem from './RoomItem'
 import Header from './Header'
 import { Nav, NavItem, NavLink,  Container, Row, Col, Form, Label, Input, Fade, Jumbotron } from 'reactstrap';
 import StatsCard from './StatsCard'
+import Footer from './Footer'
+
 
 
 class Main extends Component{
@@ -69,24 +71,42 @@ class Main extends Component{
 	render(){
 		var statsCard = <StatsCard messages={this.state.roomMessages[(this.state.curRoomId)]} />
 		return(
-			<div >
+			<div className='gray'>
 				<Header />
 				<Jumbotron className='lightgray'>
-					<h1 className='center'>Sparks Stats</h1>
-					<hr/>
+					<a href="/">
+						<h1 className='center'>Sparks Stats</h1>
+					</a>
+					<a href="/">
+						<Container>
+							<Row>
+								<Col xs="5"/>
+								<Col xs="2">
+									<img src={require('./spark-logo.png')} width='150' height='150' />
+								</Col>
+								<Col xs="5"/>
+							</Row>
+						</Container>
+					</a>
 					<h3 className='center'>Analyze a Cisco Sparks User</h3>
+					<hr/>
 					<Container >
 						<Row>
-							<Col>
-								<Form inline className='middle' onSubmit={this.handleSubmit}>
-									<Input className="width" type="text" placeholder='Enter your user token please' value={this.state.value} onChange={this.handleChange} />
-									<Input type="submit" value="Submit"/>
+							<Col xs="2"/>
+							<Col xs="8">
+								<Form onSubmit={this.handleSubmit}>
+									<InputGroup >
+										<InputGroupAddon addonType="prepend" color="info">User Token</InputGroupAddon>
+										<Input type="text" placeholder='Enter your user token please' value={this.state.value} onChange={this.handleChange} />
+										<Button color="info" type="submit" value="Submit">Submit</Button>
+									</InputGroup>
 								</Form>
 							</Col>
+							<Col xs="2"/>
 						</Row>
 					</Container>
 				</Jumbotron>
-				<div className='whitegray'>
+				<div className='gray'>
 					<Container>
 						<Row>
 							<Col xs="3">
@@ -102,6 +122,7 @@ class Main extends Component{
 					</Container>
 				</div>
 				{this.state.dataToDisplay? statsCard : null}
+				<Footer />
 			</div>
 		);
 	}

@@ -1,0 +1,11 @@
+.color {
+    background-color: #A9DFF3;
+    color: #D0D1D0;
+}
+
+.footer {
+    position: absolute;
+    left:0;
+    bottom:0;
+    right:0;
+}
