@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import "./StatsCard.css";
-import axios from 'axios';
+import {AreaChart} from 'react-easy-chart';
+import {Legend} from 'react-easy-chart';
 
 class StatsCard extends Component{
 	constructor(props){
 		super(props);
 	}
 
-	activeUsers(){
-
-	}
-
 	render(){
+		console.log(this.props.usersOverTime);
 		return(
 			<div>
-			hello
-				<ul>
-				{(this.props.messages).map(item =>
-					<li key={item.id}> {item.text}</li> )}
-				</ul>
+			<AreaChart xType={'text'} axes width={1000} height={500} data={this.props.usersOverTime}/>
+			<Legend data={this.props.usersOverTime} dataId={'type'} horizontal />
 			</div>
 		)
 	}

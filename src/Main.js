@@ -22,6 +22,7 @@ class Main extends Component{
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleRoomClick = this.handleRoomClick.bind(this);
+		this.msgesOverTime = this.msgesOverTime.bind(this);
 	}
 
 
@@ -35,25 +36,26 @@ class Main extends Component{
 		var roomMessages = {}
 		axios.get("https://api.ciscospark.com/v1/rooms", {headers: {Authorization: 'Bearer '.concat(this.state.value)}}).then(response => {
 			example = response.data.items;
-			this.setState({exampleData : example});
 			var count = 0
+			var promises = []
 	    	for (var i = 0; i < example.length; i++){
 		    	var roomId = example[i].id
-		    	axios.get("https://api.ciscospark.com/v1/messages?roomId=".concat(roomId), {headers: {Authorization: 'Bearer '.concat(this.state.value)}}).then(response => {
+		    	promises.push(axios.get("https://api.ciscospark.com/v1/messages?max=10000&roomId=".concat(roomId), {headers: {Authorization: 'Bearer '.concat(this.state.value)}}));
+			}
+			axios.all(promises).then(results => {
+				results.forEach(response => {
 					const messages = response.data.items;
-					roomId = example[count].id
+					var newRoomId = example[count].id
 					count ++;
 					all_messages = all_messages.concat(messages);
-					roomMessages[roomId] = messages;
-					if(count == (example.length)){
-						console.log(i)
-						this.setState({ listOfMessages: all_messages, roomMessages: roomMessages})	
+					roomMessages[newRoomId] = messages;
+					if(count == (example.length)){	
 					}
 				})
-				.catch(error =>{
-					console.log('error 3 ' + error);
-				});
-			}	
+				console.log(roomMessages);
+				this.setState({ listOfMessages: all_messages, roomMessages: roomMessages, exampleData: example});
+
+			})
 		})
 		.catch((error =>{
 			console.log('error 3 ' + error);
@@ -64,11 +66,69 @@ class Main extends Component{
 
 	handleRoomClick(e){
 		this.setState({curRoomId: e, dataToDisplay: true});
+
+		this.msgesOverTime(true, this.state.roomMessages[e]);
+	}
+
+	msgesOverTime(isHour, messages){
+		console.log(messages);
+		if (messages === undefined || messages.length == 0){
+		}else{
+			console.log(messages);
+			var firstTime = new Date(messages[messages.length - 1].created).getTime()
+			var interval = isHour? 3600000 : 86400000;
+			var intervalNumber = 1;
+			var userMessages = {};
+			var userTotals = {};
+			for (var i = messages.length - 1; i >= 0; i--){
+				const email = messages[i].personEmail;
+				if ((new Date(messages[i].created).getTime() - firstTime - (intervalNumber*interval)) > 0){
+
+					intervalNumber += 1;
+				}
+				userMessages[intervalNumber]
+				if (email in userMessages){
+					userTotals[email] += 1;
+					userMessages[email][intervalNumber] = userTotals[email];
+					
+				}else{
+					userTotals[email] = 1;
+					userMessages[email] = {}
+					userMessages[email][intervalNumber] = 1;
+				}
+			}
+
+			for (var e in userMessages){
+				userMessages[e][intervalNumber] = userTotals[e];
+			}
+
+			var formattedData = {};
+			for (var user in userMessages){
+				formattedData[user] = []
+			}
+
+			var options = {  
+	    		year: "numeric", month: "short",  
+	    		day: "numeric", hour: "2-digit", minute: "2-digit" 
+			}; 
+			for (var user in userMessages){
+				for (var intNum in userMessages[user]){
+					const xDate = new Date(new Date((intNum - 1) * interval).getTime() + firstTime)
+					const xCoord = xDate.toLocaleTimeString("en-us", options);
+					formattedData[user].push({x: xCoord, y: userMessages[user][intNum]});
+				}
+			}
+			var graphData = []
+			for ( var user in formattedData){
+				graphData.push(formattedData[user]);
+			}
+			this.setState({graphData : graphData.slice(0,5)})
+		}
 	}
 
 
 	render(){
-		var statsCard = <StatsCard messages={this.state.roomMessages[(this.state.curRoomId)]} />
+		var statsCard = <StatsCard usersOverTime={this.state.graphData} />
 		return(
 			<div className='gray'>
 				<Fade>
