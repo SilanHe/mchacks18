@@ -1,0 +1,22 @@
+.cards {
+    list-style: none;
+}
+
+.ul {
+    list-style:none;
+    outline-color: #0C99D5;
+    display: inline-block;
+    text-align: center;
+}
+
+.ul .li {
+    color: #0C99D5;
+    text-align: center;
+    padding: 2px 15px 5px;
+    border: 2px solid #000;
+    border-radius: 3px;
+    list-style: none;
+    display: inline-block;
+    min-width: 130px;
+    margin:5px;
+}
