@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import "./StatsCard.css";
 import axios from 'axios';
 import {BarChart} from 'react-easy-chart';
+import {PieChart} from 'react-easy-chart';
+import {ToolTip} from 'react-easy-chart';
 import FrequencyGraph from './FrequencyGraph';
 
 
@@ -12,7 +14,12 @@ class StatsCard extends Component{
             wordCount: {},
             sortedWordCount: []
         };
+
+        this.mouseOverHandler = this.mouseOverHandler.bind(this);
+        this.mouseOutHandler = this.mouseOutHandler.bind(this);
+        this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
 	}
+
 
 
 	mostPosts() {
@@ -96,18 +103,79 @@ class StatsCard extends Component{
 		
 	}
 
+	mouseOverHandler(d, e) {
+	    this.setState({
+	      showToolTip: true,
+	      top: e.y,
+	      left: e.x,
+	      value: d.value,
+	      key: d.data.key});
+	  }
+
+	  mouseMoveHandler(e) {
+	    if (this.state.showToolTip) {
+	      this.setState({top: e.y, left: e.x});
+	    }
+	  }
+
+	  mouseOutHandler() {
+	    this.setState({showToolTip: false});
+	  }
+
+	  createTooltip() {
+	    if (this.state.showToolTip) {
+	      return (
+	        <ToolTip
+	          top={this.state.top}
+	          left={this.state.left}
+	        >
+	          The value of {this.state.key} is {this.state.value}
+	        </ToolTip>
+	      );
+	    }
+	    return false;
+	  }
+
 	render(){
 		this.countMessages();
+		var tooltip = (<div> {this.state.key} sent {this.state.value} messages</div>);
 		return(
 			<div>
 				<ul>
 				{(this.props.messages).map(item =>
 					<li key={item.id}> {item.personEmail}</li> )}
 				</ul>
+
 				<FrequencyGraph sortedWordCount={this.props.sortedWordCount}/>
+			
+				
+
+				<PieChart
+				    // labels
+				    styles={{
+				      '.chart_lines': {
+				        strokeWidth: 0
+				      },
+				      '.chart_text': {
+				        fontFamily: 'serif',
+				        fontSize: '1.25em',
+				        fill: '#333'
+				      }
+				    }}
+				    data={
+				      this.countMessages()}
+				    mouseOverHandler={this.mouseOverHandler}
+    				mouseOutHandler={this.mouseOutHandler.bind(this)}
+    				mouseMoveHandler={this.mouseMoveHandler.bind(this)}
+				    margin={{top: 10, bottom: 10, left: 200, right: 100}}
+				    ></PieChart>
+				    {this.state.showToolTip? tooltip : 'Click on a segment to show the value'}
+				    <div>{document.getElementById('location')}</div>
 			</div>
 		)
 	}
+
+
 
 	contains(a, obj) {
 	    var i = a.length;
