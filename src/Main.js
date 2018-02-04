@@ -3,6 +3,7 @@ import "./Main.css";
 import axios from 'axios';
 import RoomItem from './RoomItem'
 import Header from './Header'
+import Footer from './Footer'
 import { Nav, NavItem, NavLink,  Container, Row, Col, Form, Label, Input, Fade, Jumbotron, InputGroup, Button, InputGroupAddon } from 'reactstrap';
 
 
@@ -39,7 +40,7 @@ class Main extends Component{
 
 	render(){
 		return(
-			<div >
+			<div className='gray'>
 				<Header />
 				<Jumbotron className='lightgray'>
 					<a href="/">
@@ -74,7 +75,7 @@ class Main extends Component{
 						</Row>
 					</Container>
 				</Jumbotron>
-				<div className='lightblue'>
+				<div className='gray'>
 					<Container>
 						<Row>
 							<Col xs="3">
@@ -89,6 +90,7 @@ class Main extends Component{
 						</Row>
 					</Container>
 				</div>
+				<Footer />
 			</div>
 		);
 	}
