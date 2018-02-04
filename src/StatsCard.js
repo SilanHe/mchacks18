@@ -3,6 +3,8 @@ import "./StatsCard.css";
 import {AreaChart} from 'react-easy-chart';
 import {Legend} from 'react-easy-chart';
 import {BarChart} from 'react-easy-chart';
+import {PieChart} from 'react-easy-chart';
+import {ToolTip} from 'react-easy-chart';
 import FrequencyGraph from './FrequencyGraph';
 
 
@@ -13,7 +15,12 @@ class StatsCard extends Component{
             wordCount: {},
             sortedWordCount: []
         };
+
+        this.mouseOverHandler = this.mouseOverHandler.bind(this);
+        this.mouseOutHandler = this.mouseOutHandler.bind(this);
+        this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
 	}
+
 
 
 	mostPosts() {
@@ -95,8 +102,42 @@ class StatsCard extends Component{
 		
 	}
 
+	mouseOverHandler(d, e) {
+	    this.setState({
+	      showToolTip: true,
+	      top: e.y,
+	      left: e.x,
+	      value: d.value,
+	      key: d.data.key});
+	  }
+
+	  mouseMoveHandler(e) {
+	    if (this.state.showToolTip) {
+	      this.setState({top: e.y, left: e.x});
+	    }
+	  }
+
+	  mouseOutHandler() {
+	    this.setState({showToolTip: false});
+	  }
+
+	  createTooltip() {
+	    if (this.state.showToolTip) {
+	      return (
+	        <ToolTip
+	          top={this.state.top}
+	          left={this.state.left}
+	        >
+	          The value of {this.state.key} is {this.state.value}
+	        </ToolTip>
+	      );
+	    }
+	    return false;
+	  }
+
 	render(){
-		this.countMessages();
+		// this.countMessages();
+		var tooltip = (<div> {this.state.key} sent {this.state.value} messages</div>);
 		return(
 			<div>
 				<ul>
@@ -107,9 +148,34 @@ class StatsCard extends Component{
 				<h4>Most Frequently Used Words</h4>
 				<FrequencyGraph sortedWordCount={this.props.sortedWordCount}/>
 				<AreaChart xType={'text'} axes width={1000} height={500} data={this.props.usersOverTime}/>
+	
+				<PieChart
+		
+				    styles={{
+				      '.chart_lines': {
+				        strokeWidth: 0
+				      },
+				      '.chart_text': {
+				        fontFamily: 'serif',
+				        fontSize: '1.25em',
+				        fill: '#333'
+				      }
+				    }}
+				    data={
+				      this.countMessages()}
+				    mouseOverHandler={this.mouseOverHandler}
+    				mouseOutHandler={this.mouseOutHandler.bind(this)}
+    				mouseMoveHandler={this.mouseMoveHandler.bind(this)}
+				    margin={{top: 10, bottom: 10, left: 200, right: 100}}
+				    />
+				
+				    {this.state.showToolTip? tooltip : 'Click on a segment to show the value'}
+				    <div>{document.getElementById('location')}</div>
 			</div>
 		)
 	}
+
+
 
 	contains(a, obj) {
 	    var i = a.length;
